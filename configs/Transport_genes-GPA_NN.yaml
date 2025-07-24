@@ -1,0 +1,67 @@
+# configuration for Labeled disease example
+# whose discriminator is parametrized by NN
+# null converts to None in Python
+---
+# Data
+N_samples_Q: 0        # total number of target samples
+N_samples_P: 0        # total number of prior samples
+N_dim: 200                # dimension of input data
+dataset: Transport_genes
+random_seed: 0          # random seed for data generator
+label:
+    - 0               # source day index
+    - 8               # target day index
+reduction: EMT_PCA    # dimension reduction method. choices=['EMT_PCA', 'PCA']
+
+# (f, Gamma)-divergence
+f: KL                   # choices=['KL', 'alpha', 'reverse_KL', 'JS']
+alpha: null             # parameter value for alpha divergence
+formulation: DV         # LT or DV in case of f=KL, otherwise, keep LT
+Gamma: Lipschitz        # function space choices=['Lipshitz']
+L: 1.0                  # Lipshitz constant: default=inf w/o constraint
+reverse: False          # True -> D(Q|P), False -> D(P|Q)
+constraint: hard        # choices=['hard', 'soft']
+lamda: null             # coefficient on soft constraint
+generative_model: GPA_NN# generative model name
+
+
+# Neural Network discriminator <phi>
+NN_model: fnn           # choices=['fnn', 'cnn', 'cnn-fnn']
+N_fnn_layers:           # list of the number of FNN hidden layer units / the number of CNN feed-forward hidden layer units
+    - 128
+    - 128
+    - 128
+N_cnn_layers: null      # list of the number of CNN channels
+activation_ftn:
+    - relu    # [0]: for the fnn/convolutional layer, [1]: for the cnn feed-forward layer, [2]: for the LAST cnn feed-forward layer'
+# choices=['relu', 'mollified_relu_cos3','mollified_relu_poly3','mollified_relu_cos3_shift','softplus', 'leaky_relu','elu', 'bounded_relu', 'bounded_elu']
+eps: 0.5                # Mollifier shape adjusting parameter when using mollified relu3 activations
+N_conditions: 1         # number of classes for the conditional setting
+
+# Discriminator training parameters
+epochs_phi: 10           # numbef of updates for NN to find phi*
+lr_phi: 0.001            # lr for NN
+optimizer: adam         # optimizer for NN, choices=['sgd', 'adam',]
+
+# Particles transportation parameters
+epochs: 7500            # number of updates for P
+termination_error: 0.01  # termination when the error gets smaller than termination_error
+termination_error_metric: W2    # error type to be used for termination
+lr_P: 0.01               # lr for P
+ode_solver: forward_euler   # ode solver for particle ode, choices=['forward_euler', 'AB2', 'AB3', 'AB4', 'AB5', 'ABM1', 'Heun', 'ABM2', 'ABM3', 'ABM4', 'ABM5', 'RK4', 'ode45' ]
+mobility: null          # problem dependent mobility function\nRecommendation: MNIST - bounded
+lr_P_decay: null        # delta t decay, choices=['rational', 'step',]
+
+exp_no: a_trial         # short experiment name under the same data
+mb_size_P: 0          # mini batch size for the moving distribution P
+mb_size_Q: 0          # mini batch size for the target distribution Q
+
+# save/display
+save_iter: 20            # save results per each save_iter
+plot_result: True       # True -> plot results
+#show_plots: True        # True -> show plots
+plot_axes:
+    - 0
+    - 1
+plot_intermediate_result: False # True -> save intermediate plots
+...
