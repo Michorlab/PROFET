@@ -12,6 +12,61 @@ This two-stage approach enables nonlinear, continuous trajectory reconstruction 
 PROFET has been validated on both synthetic and experimental datasets and applied to uncover treatment-induced heterogeneity in breast cancer. By recovering dynamic expression trajectories from static scRNA-seq data, PROFET provides a scalable and principled tool for modeling cell state transitions in development, disease, and therapeutic response.
 
 
+## How to Run PROFET: Notebook Workflow and File Structure
+
+To use PROFET and perform downstream analysis, follow the instructions below. Note that two key notebooks operate **in parallel**, both using the same raw input data.
+
+---
+
+### 📁 Input Data Structure
+
+All datasets are stored in the `data/` folder. Each dataset is organized into its own subfolder and should include:
+
+- A **gene expression matrix** (e.g., `.txt`)
+- A corresponding **cell time annotation file**
+
+These files serve as inputs for both notebooks described below.
+
+---
+
+### 1. Run `Preprocess_datasets.ipynb`  *(for downstream analysis)*
+
+This notebook performs **PCA** and saves the preprocessed version of each dataset.
+
+- **Input:** Raw gene expression matrix and time annotations from the `data/` subfolders.
+- **Output:** Preprocessed dataset saved in `.pkl` format in the `data/` folder.
+- These `.pkl` files are required for **visualization and trajectory validation**.
+
+---
+
+### 2. Run `PROFET_full_pipeline.ipynb`  *(for trajectory reconstruction)*
+
+This notebook runs the full PROFET pipeline:
+- **Step 1:** Load raw gene expression matrix and time annotations (from `data/` subfolders)
+- **Step 2:** Run GPA to generate particle-based trajectories
+- **Step 3:** Apply force-matching to estimate the time-dependent vector field
+
+- **Output:** A `.pickle` file containing the reconstructed single-cell trajectory, saved in the `assets/` folder.
+
+⚠️ **Note:** This notebook also uses the raw data from the `data/` subfolders (not the `.pkl` files from preprocessing). It runs independently of `Preprocess_datasets.ipynb`, but both notebooks must be executed for full analysis.
+
+---
+
+### ✅ After Running Both Notebooks
+
+At this stage, you should have:
+- A **preprocessed `.pkl` file** (from `Preprocess_datasets.ipynb`) in the `data/` folder
+- A **reconstructed `.pickle` trajectory file** (from `PROFET_full_pipeline.ipynb`) in the `assets/` folder
+
+These two files are used together for:
+- Visualization
+- Subtrajectory classification
+- Validation and downstream analysis
+
+You can now proceed to:
+- `Trajectory_Visualization_and_Subtrajectory_Analysis.ipynb` (for plotting and clustering trajectories)
+
+
 
 ## Installation
 ```bash
@@ -19,10 +74,6 @@ git clone https://github.com/yourusername/PROFET.git
 cd PROFET
 pip install -r requirements.txt
 ```
-
-## Getting started
-Here’s how to run a basic example:
-
 
 ## Project Structure
 
