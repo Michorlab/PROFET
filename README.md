@@ -25,7 +25,8 @@ Here’s how to run a basic example:
 
 
 ## Project Structure
-PROFET/
+
+```
 PROFET/
 ├── scripts/                            # Main training and utility scripts
 │   ├── train_time_dep_vectorfields.py  # Step 2: train time-dependent vector fields (force matching)
@@ -44,6 +45,7 @@ PROFET/
 ├── assets/                             # Output directory for results and plots
 │
 └── README.md                           # Project overview and usage instructions
+```
 
 
 ## Examples
