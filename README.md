@@ -26,20 +26,20 @@ Here’s how to run a basic example:
 
 ## Project Structure
 PROFET/
+PROFET/
 ├── scripts/                            # Main training and utility scripts
-│   ├── train_time_dep_vectorfields.py  # Training script for time-dependent vector fields (force-matching, step 2)
-│   ├── GPA_NN/                          # GPA (Generative Particle Algorithm) implementation
-│   │   └── GPA_NN.py                    # Training script for GPA (step 1)
-│   └── util/                            # Utilities and helper functions for training
-│       └── ...                          # e.g., data loading, argparsing, plotting
+│   ├── train_time_dep_vectorfields.py  # Step 2: train time-dependent vector fields (force matching)
+│   ├── GPA_NN/                          # Step 1: Generative Particle Algorithm (GPA) implementation
+│   │   └── GPA_NN.py                    # Main GPA training script
+│   └── util/                            # Helper functions: data loading, plotting, etc.
 │
-├── configs/                            # YAML configuration files for training and model setup
-│   └── gpa_config.yaml                 # Example config for GPA_NN
+├── configs/                            # YAML configuration files
+│   └── gpa_config.yaml                 # Example configuration for GPA
 │
-├── notebooks/                          # Jupyter notebooks for end-to-end workflows or experiments
-│   └── example_pipeline.ipynb          # 
+├── notebooks/                          # Jupyter notebooks for complete workflows
+│   └── example_pipeline.ipynb          # End-to-end example pipeline
 │
-├── data/                               # Datasets and its preprocessed files 
+├── data/                               # Input datasets and preprocessed files
 │
 ├── assets/                             # Output directory for results and plots
 │
