@@ -54,17 +54,28 @@ This notebook runs the full PROFET pipeline:
 
 ### ✅ After Running Both Notebooks
 
-At this stage, you should have:
-- A **preprocessed `.pkl` file** (from `Preprocess_datasets.ipynb`) in the `data/` folder
-- A **reconstructed `.pickle` trajectory file** (from `PROFET_full_pipeline.ipynb`) in the `assets/` folder
+You should now have:
 
-These two files are used together for:
-- Visualization
-- Subtrajectory classification
-- Validation and downstream analysis
+- A **preprocessed `.pkl` file** (from `Preprocess_datasets.ipynb`) in the `data/` folder  
+- A **reconstructed `.pickle` file** (from `PROFET_full_pipeline.ipynb`) in the `assets/` folder
 
-You can now proceed to:
-- `Trajectory_Visualization_and_Subtrajectory_Analysis.ipynb` (for plotting and clustering trajectories)
+These two files are required for all downstream analysis and visualization tasks.
+
+---
+
+### 📊 Proceed to Downstream Analysis
+
+You can now explore the following notebooks:
+
+- **`Downstream analysis - Trajectory visualization and subtrajectory classification.ipynb`**  
+  → Visualize inferred trajectories in PCA space and classify subtrajectories based on cell fates or ancestors
+
+- **`Downstream analysis - Reconstruction of gene expression dynamics in mESC and EMT data.ipynb`**  
+  → Visualize gene expression dynamics for genes of interest in mESC and EMT datasets
+
+- **`Downstream analysis - Reconstruction of heterogeneity of phenotypic shift in MCF7 cell line and patients data.ipynb`**  
+  → Analyze the diversity of phenotypic shifts in both PCA space and gene dynamics in MCF7 and patient datasets
+
 
 
 
